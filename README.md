@@ -1,3 +1,13 @@
+Enables audio outputs on OSX for CM6206 Audio Card. By default, although it is fully USB audio compliant, outputs are not enabled and there is no sound
+
+# Status
+
+Fixes 
++ works on x64 platforms
++ works with Catalina 10.15.6
+
+# Notes
+
 kIOReturnExclusiveAccess
 case kIOReturnExclusiveAccess: sprintf(out_buf,"kIOReturnExclusiveAccess - exclusive access and device already open"); break;
 
