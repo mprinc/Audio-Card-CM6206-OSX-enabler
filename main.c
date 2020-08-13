@@ -1,5 +1,7 @@
 /*
  * CM6206 Enabler by Alexander Thomas, 2009/06 - 2011/01
+ * mPrinC (Sasha Rudan) 2020/08
+ *  + fixed code to work even with the error 'in use' (error 2c5)
  * This will activate sound output on some of the cheapest USB 5.1 adaptors
  *   available, more specifically the ones that use the C-Media CM6206 chip.
  *   This chip is also used in some products from major brands, e.g. the
@@ -30,6 +32,9 @@
  *     and if so, allow to enable it.
  *   - make it work in OS X 10.4.* and 10.3.9. For some reason, interface 2
  *     cannot be opened in those OSs because it is 'in use' (error 2c5)
+ *      + mPrinC: Currently FAIL_ON_kIOReturnExclusiveAccess is introduced,
+ *          so by default on this error we simply continue now as
+ *          it is still possible to activate outputs
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -70,8 +75,10 @@
 #define CMVERSION "2.1"
 
 // for debugging
-//#define VERBOSE
+#define VERBOSE
+//#define FAIL_ON_kIOReturnExclusiveAccess
 
+// CM6206 reference
 #define kVendorID	0x0d8c
 #define kProductID	0x0102
 
@@ -310,7 +317,9 @@ void dealWithInterface(io_service_t usbInterfaceRef)
 		err = (*intf)->USBInterfaceOpenSeize(intf);
 		if (err) {
 			fprintf(stderr, "dealWithInterface: unable to seize interface. ret = %08x\n", err);
-			return;
+            #ifdef FAIL_ON_kIOReturnExclusiveAccess
+                return;
+            #endif
 		}
     }
 #ifdef VERBOSE
@@ -337,7 +346,7 @@ void dealWithInterface(io_service_t usbInterfaceRef)
     err = (*intf)->Release(intf);
     if (err) {
 		fprintf(stderr, "dealWithInterface: unable to release interface. ret = %08x\n", err);
-		return;
+        return;
     }
 }
 
@@ -644,7 +653,8 @@ int ActivateDevices()
 	while ( (usbDeviceRef = IOIteratorNext(iterator)) ) {
 		foundDevice = 1;
 		if(gVerbose)
-			fprintf(stderr, "CM6206 found (device %p)\n", (void*)usbDeviceRef);
+            // https://stackoverflow.com/a/40067124/257561
+			fprintf(stderr, "CM6206 found (device %p)\n", (void*)(size_t)usbDeviceRef);
 		dealWithDevice(usbDeviceRef);  // here the important stuff happens
 		IOObjectRelease(usbDeviceRef);	// no longer need this reference
 	}
