@@ -8,6 +8,10 @@ Fixes
 
 # Notes
 
+Initial code: 
++ https://www.dr-lex.be/software/cm6206.html
++ by Alexander Thomas (aka Dr. Lex)
+
 kIOReturnExclusiveAccess
 case kIOReturnExclusiveAccess: sprintf(out_buf,"kIOReturnExclusiveAccess - exclusive access and device already open"); break;
 
@@ -21,6 +25,8 @@ else if (ret == kIOReturnExclusiveAccess)
 }
 ```
 
+https://github.com/luisliz/CM6206-Catalina
+
 MOZGIII / cm6206-mac-codeless-kext
 + https://github.com/MOZGIII/cm6206-mac-codeless-kext
 + Codeless Kext for CM6206 USB Sound Card to prevent the Apple drivers from hijacking a device
@@ -28,6 +34,10 @@ MOZGIII / cm6206-mac-codeless-kext
     + became readonly
         + From within the recovery mode might be possible
     + Kexts are deprecated
+
+[Cheap Multichannel Audio on OS X](https://www.zachpoff.com/resources/cheap-multichannel-audio-on-os-x/)
++ “7.1 channel USB soundcards” based on the C-Media CM6206 chipset
++ https://www.cmedia.com.tw/products
 
 [How to replace the missing optical-digital audio output on newer Macs](https://www.macworld.com/article/3205890/how-to-replace-the-missing-optical-digital-audio-output-on-newer-macs.html)
 

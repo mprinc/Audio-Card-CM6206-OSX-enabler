@@ -20,7 +20,7 @@
  * There's probably also a lot of opportunity to simplify and/or do things
  *   more efficiently.
  *
- * Versions: 1.0  2009/06: initial release
+ * Versions: 1.0  2009/06: initial release	
  *           2.0  2011/01: implemented 'daemon mode'
  *           2.1  2011/02: fixed the program causing a delay when entering sleep
  *
