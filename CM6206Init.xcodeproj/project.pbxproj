@@ -164,6 +164,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = cm6206init;
 				SDKROOT = macosx;
 				"SDKROOT[arch=i386]" = macosx10.4;
@@ -181,6 +182,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INSTALL_PATH = /usr/local/bin;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = cm6206init;
 				SDKROOT = macosx;
 				"SDKROOT[arch=i386]" = macosx10.4;
